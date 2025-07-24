@@ -31,6 +31,14 @@ class Animal
     #[ORM\Column]
     private ?bool $isAvailable = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Breed $breed = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +100,30 @@ class Animal
     public function setIsAvailable(bool $isAvailable): static
     {
         $this->isAvailable = $isAvailable;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getBreed(): ?Breed
+    {
+        return $this->breed;
+    }
+
+    public function setBreed(?Breed $breed): static
+    {
+        $this->breed = $breed;
 
         return $this;
     }
