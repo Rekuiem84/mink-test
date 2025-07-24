@@ -6,37 +6,55 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AnimalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['animal:read']],
+)]
 class Animal
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['animal:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['animal:read'])]
+
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['animal:read'])]
+
     private ?int $age = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['animal:read'])]
+
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['animal:read'])]
+
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Groups(['animal:read'])]
+
     private ?bool $isAvailable = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['animal:read'])]
+
     private ?Type $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['animal:read'])]
+
     private ?Breed $breed = null;
 
     public function getId(): ?int
