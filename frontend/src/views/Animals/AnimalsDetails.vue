@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import router from "@/router";
 import { useRoute } from "vue-router";
 import AnimalCard from "@/components/AnimalCard.vue";
 
@@ -18,6 +19,29 @@ const fetchAnimal = async () => {
 	}
 };
 
+const isDeleting = ref(false);
+
+const deleteAnimal = async () => {
+	if (!animal.value) return;
+
+	if (!confirm(`Confirmer la suppression de ${animal.value.name} ?`)) {
+		return;
+	}
+
+	isDeleting.value = true;
+
+	try {
+		await axios.delete(`http://localhost:8000/api/animals/${animal.value.id}`);
+		alert(`${animal.value.name} supprimé.`);
+		router.push("/animals");
+	} catch (error) {
+		console.error("Erreur suppression :", error);
+		alert("Erreur lors de la suppression.");
+	} finally {
+		isDeleting.value = false;
+	}
+};
+
 onMounted(() => {
 	fetchAnimal();
 });
@@ -25,7 +49,14 @@ onMounted(() => {
 
 <template>
 	<AnimalCard v-if="animal" :animal="animal" />
-	<div v-else>
+	<button
+		@click="deleteAnimal"
+		:disabled="isDeleting"
+		class="inline-block my-4 ml-2 px-4 py-2 bg-red-500 text-white font-bold rounded-lg"
+		type="button">
+		{{ isDeleting ? "Suppression..." : "Supprimer" }}
+	</button>
+	<!-- <div v-else>
 		<p>Aucun animal trouvé</p>
-	</div>
+	</div> -->
 </template>
