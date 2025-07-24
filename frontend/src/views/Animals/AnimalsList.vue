@@ -3,13 +3,15 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import AnimalCard from "@/components/AnimalCard.vue";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 onMounted(() => {
 	fetchAnimals();
 });
 const animals = ref([]);
 const fetchAnimals = async () => {
 	try {
-		const response = await axios.get("http://localhost:8000/api/animals");
+		const response = await axios.get(`${API_BASE_URL}/animals`);
 		animals.value = response.data["member"];
 		console.log(animals.value);
 	} catch (error) {
