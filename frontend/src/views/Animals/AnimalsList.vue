@@ -19,14 +19,16 @@ const fetchAnimals = async () => {
 </script>
 
 <template>
-	<div class="animals-list">
-		<h1>Animals List</h1>
-		<RouterLink to="animalsCreate" class="create-animal-link">
-			Add New Animal
-		</RouterLink>
+	<h1 class="text-4xl text-[rgb(232,232,232)] font-bold">Liste des animaux</h1>
+	<RouterLink
+		to="/animals/new"
+		class="inline-block my-4 px-4 py-2 bg-[hsla(160,100%,37%,1)] text-white font-bold rounded-lg">
+		Ajouter un nouvel animal
+	</RouterLink>
+	<div class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
 		<RouterLink
 			:to="`/animals/${animal.id}`"
-			class="animal-card-link"
+			class="block no-underline text-inherit"
 			v-for="animal in animals"
 			:key="animal.id">
 			<AnimalCard :animal="animal" />

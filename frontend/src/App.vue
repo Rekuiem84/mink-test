@@ -4,24 +4,14 @@ import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
-	<header>
-		<img
-			alt="Vue logo"
-			class="logo"
-			src="@/assets/logo.svg"
-			width="125"
-			height="125" />
-
-		<div class="wrapper">
-			<HelloWorld msg="You did it!" />
-
-			<nav>
-				<RouterLink to="/">Home</RouterLink>
-				<RouterLink to="/animals">Animals</RouterLink>
-			</nav>
-		</div>
-	</header>
-
+	<nav>
+		<RouterLink to="/animals" class="text-[hsla(160,100%,37%,1)]">
+			Animaux
+		</RouterLink>
+		<RouterLink to="/animals/new" class="text-[hsla(160,100%,37%,1)]">
+			Ajouter un animal
+		</RouterLink>
+	</nav>
 	<RouterView />
 </template>
 

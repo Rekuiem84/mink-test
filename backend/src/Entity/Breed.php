@@ -24,7 +24,7 @@ class Breed
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['animal:read'])]
+    #[Groups(['animal:read', 'animal:write'])]
 
     private ?string $name = null;
 

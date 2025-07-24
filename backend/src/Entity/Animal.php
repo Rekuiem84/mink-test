@@ -110,7 +110,7 @@ class Animal
         return $this;
     }
 
-    public function isAvailable(): ?bool
+    public function getIsAvailable(): ?bool
     {
         return $this->isAvailable;
     }
