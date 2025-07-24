@@ -29,7 +29,7 @@ const fetchAnimals = async () => {
 	</RouterLink>
 	<div class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
 		<RouterLink
-			:to="`/animals/${animal.id}`"
+			:to="{ name: 'animalsDetails', params: { id: animal.id } }"
 			class="block no-underline text-inherit"
 			v-for="animal in animals"
 			:key="animal.id">

@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
 	<AnimalCard v-if="animal" :animal="animal" />
 	<RouterLink
-		:to="`/animals/${route.params.id}/edit`"
+		:to="{ name: 'animalsEdit', params: { id: route.params.id } }"
 		class="inline-block my-2 ml-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg">
 		Modifier
 	</RouterLink>

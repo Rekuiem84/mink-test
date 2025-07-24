@@ -5,7 +5,9 @@ import HelloWorld from "./components/HelloWorld.vue";
 
 <template>
 	<nav>
-		<RouterLink to="/animals" class="text-[hsla(160,100%,37%,1)] text-lg">
+		<RouterLink
+			:to="{ name: 'animalsList' }"
+			class="text-[hsla(160,100%,37%,1)] text-lg">
 			Accueil
 		</RouterLink>
 	</nav>

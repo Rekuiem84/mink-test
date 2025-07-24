@@ -61,7 +61,7 @@ const updateAnimal = async () => {
 			}
 		);
 		alert("Animal modifié avec succès !");
-		router.push("/animals");
+		router.push("/");
 	} catch (err) {
 		console.error("Erreur lors de la mise à jour :", err);
 		alert("Erreur lors de la mise à jour.");
