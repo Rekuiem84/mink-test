@@ -21,6 +21,15 @@ const fetchAnimals = async () => {
 <template>
 	<div class="animals-list">
 		<h1>Animals List</h1>
-		<AnimalCard v-for="animal in animals" :key="animal.id" :animal="animal" />
+		<RouterLink to="animalsCreate" class="create-animal-link">
+			Add New Animal
+		</RouterLink>
+		<RouterLink
+			:to="`/animals/${animal.id}`"
+			class="animal-card-link"
+			v-for="animal in animals"
+			:key="animal.id">
+			<AnimalCard :animal="animal" />
+		</RouterLink>
 	</div>
 </template>
