@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import AnimalsList from "@/views/Animals/AnimalsList.vue";
 import AnimalsCreate from "@/views/Animals/AnimalsCreate.vue";
 import AnimalsDetails from "@/views/Animals/AnimalsDetails.vue";
+import AnimalsEdit from "@/views/Animals/AnimalsEdit.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
 			path: "/animals/new",
 			name: "animalsCreate",
 			component: AnimalsCreate,
+		},
+		{
+			path: "/animals/:id/edit",
+			name: "animalsEdit",
+			component: AnimalsEdit,
 		},
 	],
 });
