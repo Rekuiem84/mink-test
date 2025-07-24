@@ -6,10 +6,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 <template>
 	<nav>
 		<RouterLink to="/animals" class="text-[hsla(160,100%,37%,1)]">
-			Animaux
-		</RouterLink>
-		<RouterLink to="/animals/new" class="text-[hsla(160,100%,37%,1)]">
-			Ajouter un animal
+			Accueil
 		</RouterLink>
 	</nav>
 	<RouterView />
