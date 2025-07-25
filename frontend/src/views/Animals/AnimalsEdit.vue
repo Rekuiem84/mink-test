@@ -106,7 +106,7 @@ onMounted(() => {
 				class="w-full p-2 rounded bg-[#333]"></textarea>
 		</div>
 		<div>
-			<label>Prix (€)</label>
+			<label>Prix HT(€)</label>
 			<input
 				v-model="animal.price"
 				type="number"

@@ -5,6 +5,8 @@ const props = defineProps({
 		required: true,
 	},
 });
+const fraisVente = 0.2; // 20% de frais de vente
+// prix TTC = prix * (1 + frais de vente) = prix * 1.2
 </script>
 
 <template>
@@ -16,7 +18,10 @@ const props = defineProps({
 		<p class="mt-2">
 			<strong>Description :</strong> {{ props.animal.description }}
 		</p>
-		<p class="mt-2"><strong>Prix :</strong> {{ props.animal.price }} €</p>
+		<p class="mt-2">
+			<strong>Prix TTC :</strong>
+			{{ (props.animal.price * (1 + fraisVente)).toFixed(2) }} €
+		</p>
 		<p class="mt-2">
 			<strong>Disponibilité:</strong>
 			{{ props.animal.isAvailable ? "Oui" : "Non" }}

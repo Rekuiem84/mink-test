@@ -35,7 +35,7 @@ const deleteAnimal = async () => {
 	try {
 		await axios.delete(`${API_BASE_URL}/animals/${animal.value.id}`);
 		alert(`${animal.value.name} supprimé.`);
-		router.push("/animals");
+		router.push("/");
 	} catch (error) {
 		console.error("Erreur suppression :", error);
 		alert("Erreur lors de la suppression.");
@@ -50,20 +50,28 @@ onMounted(() => {
 </script>
 
 <template>
-	<AnimalCard v-if="animal" :animal="animal" />
-	<RouterLink
-		:to="{ name: 'animalsEdit', params: { id: route.params.id } }"
-		class="inline-block my-2 ml-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg">
-		Modifier
-	</RouterLink>
-	<button
-		@click="deleteAnimal"
-		:disabled="isDeleting"
-		class="inline-block my-4 ml-2 px-4 py-2 bg-red-500 text-white font-bold rounded-lg"
-		type="button">
-		{{ isDeleting ? "Suppression..." : "Supprimer" }}
-	</button>
-	<!-- <div v-else>
+	<div v-if="animal">
+		<AnimalCard :animal="animal" />
+		<RouterLink
+			:to="{ name: 'animalsEdit', params: { id: route.params.id } }"
+			class="inline-block my-2 ml-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg">
+			Modifier
+		</RouterLink>
+		<button
+			@click="deleteAnimal"
+			:disabled="isDeleting"
+			class="inline-block my-4 ml-2 px-4 py-2 bg-red-500 text-white font-bold rounded-lg"
+			type="button">
+			{{ isDeleting ? "Suppression..." : "Supprimer" }}
+		</button>
+		<a
+			href="tel:0606060606"
+			class="inline-block my-4 ml-2 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg"
+			>Appeler la ferme</a
+		>
+	</div>
+
+	<div v-else>
 		<p>Aucun animal trouvé</p>
-	</div> -->
+	</div>
 </template>

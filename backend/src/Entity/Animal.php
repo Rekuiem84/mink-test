@@ -2,28 +2,37 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Serializer\Filter\GroupFilter;
 use App\Repository\AnimalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Bool_;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
-#[ApiResource(
-    normalizationContext: ['groups' => ['animal:read']],
-    operations: [
-        new Get(),
-        new GetCollection(),
-        new Post(security: "is_granted('ROLE_ADMIN')"),
-        new Patch(security: "is_granted('ROLE_ADMIN')"),
-        new Delete(security: "is_granted('ROLE_ADMIN')"),
-    ]
-)]
+#[
+    ApiResource(
+        normalizationContext: ['groups' => ['animal:read']],
+        // operations: [
+        //     new Get(),
+        //     new GetCollection(),
+        //     new Post(security: "is_granted('ROLE_ADMIN')"),
+        //     new Patch(security: "is_granted('ROLE_ADMIN')"),
+        //     new Delete(security: "is_granted('ROLE_ADMIN')"),
+        // ]
+    )
+]
+#[ApiFilter(SearchFilter::class, properties: ['name' => 'partial', 'type' => 'exact', 'breed' => 'exact'])]
+#[ApiFilter(BooleanFilter::class, properties: ['isAvailable'])]
 class Animal
 {
     #[ORM\Id]

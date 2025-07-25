@@ -3,6 +3,8 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const router = useRouter();
 
 const form = ref({
@@ -23,7 +25,7 @@ const isLoading = ref(false);
 
 const fetchTypes = async () => {
 	try {
-		const res = await axios.get("http://localhost:8000/api/types");
+		const res = await axios.get(`${API_BASE_URL}/types`);
 		types.value = res.data["member"] || [];
 	} catch (error) {
 		console.error("Erreur récupération types :", error);
@@ -32,7 +34,7 @@ const fetchTypes = async () => {
 
 const fetchBreeds = async () => {
 	try {
-		const res = await axios.get("http://localhost:8000/api/breeds");
+		const res = await axios.get(`${API_BASE_URL}/breeds`);
 		breeds.value = res.data["member"] || [];
 	} catch (error) {
 		console.error("Erreur récupération races :", error);
@@ -59,12 +61,9 @@ const submitForm = async () => {
 	};
 
 	try {
-		const response = await axios.post(
-			"http://localhost:8000/api/animals",
-			payload
-		);
+		const response = await axios.post(`${API_BASE_URL}/animals`, payload);
 		console.log("Animal créé :", response.data);
-		router.push("/animals");
+		router.push("/");
 	} catch (error) {
 		console.error("Erreur création animal :", error);
 		errorMessage.value = "Une erreur est survenue lors de la création.";
@@ -113,7 +112,7 @@ const submitForm = async () => {
 		</div>
 
 		<div>
-			<label for="price" class="block mb-1 font-bold">Prix (€)</label>
+			<label for="price" class="block mb-1 font-bold">Prix HT(€)</label>
 			<input
 				id="price"
 				v-model.number="form.price"
